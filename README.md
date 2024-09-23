@@ -1,7 +1,7 @@
-# Instagram Auto Profile Picture Changer with Random Background
+# ZAMINSTAGRAM
 
 This Python script automates the process of generating an image with a random color background and uploading it as your Instagram profile picture at regular intervals. The images can be letters, words, or any PNG with a transparent background.
-
+### YOU CAN USE MY OTHER CODE FOR MAKING CUSTOM PHRASES, SYMBOLS, LETTERS OR NUMBERS IN PNG WITH A CUSTOM FONT
 ## Features
 
 - *Random Background Generator*: Takes a transparent PNG image (like a letter or a word) and randomly changes its background color.
@@ -95,7 +95,7 @@ Once logged in, the script uploads the generated image (foto.png) to the Instagr
 └── script.py              # The main Python script
 ```
 
-##Important Notes
+## Important Notes
 
 1. First-Time Manual Login: You must manually log in to Instagram during the first run. After that, saved cookies will handle the login automatically.
 
