@@ -77,9 +77,13 @@ A PNG image with a transparent background (such as a letter or word) is loaded.
 The script generates a random background color and merges it with the transparent PNG.
 
 The final image is saved as foto.png.
+![foto](https://github.com/user-attachments/assets/3eb79990-f4a4-49a7-b970-430ecf3e1c03) ![foto](https://github.com/user-attachments/assets/dcdf63aa-1557-44ef-a86b-1734080656f7)
+
+
 
 
 3. Profile Picture Update:
+
 
 Once logged in, the script uploads the generated image (foto.png) to the Instagram profile at intervals (e.g., every 12 hours).
 
