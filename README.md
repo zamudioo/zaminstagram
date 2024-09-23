@@ -27,7 +27,7 @@ Download the appropriate version of ChromeDriver and place it in your system pat
 
 
 
-##How to Use
+## How to Use
 
 First-Time Setup
 
@@ -38,7 +38,7 @@ First-Time Setup
 
 
 
-##Step-by-Step Execution
+## Step-by-Step Execution
 
 1. Update the Script Variables: Open the script and edit the following variables:
 
@@ -61,7 +61,7 @@ python script.py
 
 
 
-##How the Code Works
+## How the Code Works
 
 1. Login Automation:
 
@@ -88,7 +88,7 @@ The final image is saved as foto.png.
 Once logged in, the script uploads the generated image (foto.png) to the Instagram profile at intervals (e.g., every 12 hours).
 
 
-##Folder Structure
+## Folder Structure
 
 ```
 ├── cookies.json           # Saved Instagram session cookies
