@@ -10,22 +10,18 @@ This Python script automates the process of generating an image with a random co
 
 ## Prerequisites
 
-1. *Install Required Libraries*:
+1. Install Required Libraries:
    Install the necessary Python packages by running:
    ```bash
    pip install selenium requests pillow
 
 2. Google Chrome and ChromeDriver:
 
-Ensure you have Google Chrome installed.
+3. Ensure you have Google Chrome installed.
 
-Download the appropriate version of ChromeDriver and place it in your system path or the project folder.
+4. Download the appropriate version of ChromeDriver and place it in your system path or the project folder.
 
-
-
-3. Instagram Account: You need a valid Instagram account for logging in and updating the profile picture.
-
-
+5.  Instagram Account: You need a valid Instagram account for logging in and updating the profile picture.
 
 ## How to Use
 
