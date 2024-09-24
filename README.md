@@ -1,6 +1,6 @@
 # ZAMINSTAGRAM 
 
-##⚠️THIS TOOL IS ON DEVELOPMENT, INSTAGRAM MIGHT DETECT THE AUTOMATIZATION AND BAN/RESTRICT YOUR ACCOUNT, BE CAREFUL AND FEEL FREE TO EDIT THE CODE BY YOUR OWN
+## ⚠️THIS TOOL IS ON DEVELOPMENT, INSTAGRAM MIGHT DETECT THE AUTOMATIZATION AND BAN/RESTRICT YOUR ACCOUNT, BE CAREFUL AND FEEL FREE TO EDIT THE CODE BY YOUR OWN
 
 This Python script automates the process of generating an image with a random color background and uploading it as your Instagram profile picture at regular intervals. The images can be letters, words, or any PNG with a transparent background.
 ### YOU CAN USE MY OTHER CODE FOR MAKING CUSTOM PHRASES, SYMBOLS, LETTERS OR NUMBERS IN PNG WITH A CUSTOM FONT https://github.com/zamudioo/zamudio.png/tree/main
