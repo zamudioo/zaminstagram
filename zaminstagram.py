@@ -11,9 +11,9 @@ from http.cookiejar import CookieJar
 
 USER= 'username of your ig account'
 PWD= 'your instagram password'
-PATH_PHOTO= '/letter/letter.png' #replace letter.png to your photo in png with whatever letter you want the background to be replaced randomly, they all are in the folder letter, or use the other git code to generate your own letter or phrases, then replace where that photo or phrase is located
-COOKIE_FILE = '/cookies.json'
-EXTENSION_PATH = '/chaff.crx'
+PATH_PHOTO= './letter/letter.png' #replace letter.png to your photo in png with whatever letter you want the background to be replaced randomly, they all are in the folder letter, or use the other git code to generate your own letter or phrases, then replace where that photo or phrase is located
+COOKIE_FILE = './cookies.json'
+EXTENSION_PATH = './chaff.crx'
 
 def EXTENSION():
     chrome_options = Options()
