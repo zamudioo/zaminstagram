@@ -15,23 +15,29 @@ PATH_PHOTO= './letter/letter.png' #replace letter.png to your photo in png with 
 COOKIE_FILE = './cookies.json'
 EXTENSION_PATH = './chaff.crx'
 
-def EXTENSION():
+def iniciar_navegador_con_extension():
     chrome_options = Options()
     chrome_options.add_extension(EXTENSION_PATH)
+    
+    user_agent = random.choice([
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+    ])
+    chrome_options.add_argument(f"user-agent={user_agent}")
     
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://www.instagram.com")
     
-    time.sleep(15 * 60)
+    time.sleep(random.uniform(10, 20) * 60)  
 
     cookies = driver.get_cookies()
     driver.quit()
     
-    cookies_selenium(cookies)
-    print("Extension executed and cookies saved")
+    guardar_cookies_selenium(cookies)
+    print("Extensión ejecutada y cookies guardadas")
     return cookies
 
-def cookies_selenium(cookies):
+def guardar_cookies_selenium(cookies):
     with open(COOKIE_FILE, 'w') as f:
         json.dump(cookies, f)
 
@@ -41,17 +47,14 @@ def cargar_cookies():
             cookies = json.load(f)
             session = requests.Session()
             jar = requests.cookies.RequestsCookieJar()
+            
             for cookie in cookies:
-                if isinstance(cookie, dict): 
-                    jar.set(cookie.get('name'), cookie.get('value'),
-                            domain=cookie.get('domain', ''),
-                            path=cookie.get('path', '/'))
+                jar.set(cookie['name'], cookie['value'], domain=cookie['domain'], path=cookie.get('path', '/'))
             
             session.cookies.update(jar)
-            print("Session loaded from cookies")
+            print("Sesión cargada desde cookies")
             return session, jar
     return None, None
-
 
 def random_color():
     while True:
@@ -59,7 +62,7 @@ def random_color():
         if color != (0, 0, 0) and color != (255, 255, 255):
             return color
 
-def gen_photo():
+def generar_foto_perfil():
     foreground = Image.open(PATH_PHOTO).convert("RGBA")
     width, height = foreground.size
 
@@ -67,17 +70,17 @@ def gen_photo():
     background.paste(foreground, (0, 0), foreground)
     
     background = background.convert("RGB")
-    background.save("/foto.png")
-    print("photo replaced/generated")
+    background.save("foto.png")
+    print("Foto generada/actualizada")
 
-def save_cookies(session, cookies):
+def guardar_cookies(session, cookies):
     data = {
         "cookies": cookies,
         "session_headers": dict(session.headers)
     }
     with open(COOKIE_FILE, 'w') as f:
         json.dump(data, f)
-    print("the cookies have been saved in the json")
+    print("Cookies guardadas en el json")
 
 def login_instagram(username, password):
     session, cookies = cargar_cookies()
@@ -86,10 +89,10 @@ def login_instagram(username, password):
         perfil_url = 'https://www.instagram.com/accounts/edit/'
         perfil_response = session.get(perfil_url)
         if perfil_response.status_code == 200:
-            print("Previously started session, using saved cookies.")
+            print("Sesión previamente iniciada, usando cookies guardadas.")
             return session, cookies
         else:
-            print("Expired or invalid cookies, making a new login.")
+            print("Cookies expiradas o inválidas, realizando nuevo login.")
 
     login_url = 'https://www.instagram.com/accounts/login/ajax/'
     link = 'https://www.instagram.com/accounts/login/'
@@ -97,7 +100,7 @@ def login_instagram(username, password):
     time_now = int(datetime.now().timestamp())
     session = requests.Session()
     response = session.get(link)
-    csrf_token = response.cookies['csrftoken']
+    csrf_token = response.cookies.get('csrftoken', '')
 
     payload = {
         'username': username,
@@ -107,7 +110,10 @@ def login_instagram(username, password):
     }
 
     login_header = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+        "User-Agent": random.choice([
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+        ]),
         "X-Requested-With": "XMLHttpRequest",
         "Referer": "https://www.instagram.com/accounts/login/",
         "x-csrftoken": csrf_token
@@ -117,12 +123,12 @@ def login_instagram(username, password):
     login_data = json.loads(login_response.text)
 
     if login_data.get("authenticated"):
-        print("Successful login")
+        print("Login exitoso")
         cookies = session.cookies.get_dict()
-        save_cookies(session, cookies)
+        guardar_cookies(session, cookies)
         return session, cookies
     else:
-        print("failed login", login_response.text)
+        print("Error en login", login_response.text)
         return None, None
 
 def subir_foto_perfil(session, cookies, image_path):
@@ -133,7 +139,10 @@ def subir_foto_perfil(session, cookies, image_path):
         image_data = image_file.read()
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+        "User-Agent": random.choice([
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+        ]),
         "x-csrftoken": csrf_token,
         "Referer": "https://www.instagram.com/accounts/edit/",
     }
@@ -145,24 +154,25 @@ def subir_foto_perfil(session, cookies, image_path):
     response = session.post(url_editar_perfil, headers=headers, files=files)
     
     if response.status_code == 200:
-        print("Profile photo updated successfully.")
+        print("Foto de perfil actualizada correctamente.")
     else:
-        print("Error when changing profile photo:", response.text)
+        print("Error al cambiar la foto de perfil:", response.text)
 
 if __name__ == "__main__":
-    username = (USER)
-    password = (PWD)
-    image_path = "/foto.png"
+    username = USER
+    password = PWD
+    image_path = "foto.png"
 
     if not os.path.exists(COOKIE_FILE):
-        EXTENSION()
+        iniciar_navegador_con_extension()
 
     session, cookies = login_instagram(username, password)
 
     if session and cookies:
         while True:
-            gen_photo()
+            generar_foto_perfil()
             subir_foto_perfil(session, cookies, image_path)
-            time.sleep(30)
+            time.sleep(random.uniform(10800, 14400)) 
     else:
-        print("Login error")
+        print("Error en el login")
+
